@@ -14,7 +14,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    //fun
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
 
 }
 
