@@ -85,6 +85,7 @@ extension ViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.set(data: products)
+            cell.delegate = self
             return cell
         } else{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: idProductCell, for: indexPath) as? ProductTableViewCell else{
@@ -120,5 +121,12 @@ extension ViewController: UISearchBarDelegate {
         products = newProductList
         tableView.reloadData()
         searchBar.resignFirstResponder()
+    }
+}
+
+extension ViewController: CarouselTableViewCellDelegate {
+    func touch(name: Product) {
+        self.productSelecteds.append(name)
+        view.backgroundColor = name.name.lowercased() == "hamburguesa" ? .red : .blue
     }
 }

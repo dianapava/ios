@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol CarouselTableViewCellDelegate: AnyObject {
+    func touch(name: Product)
+}
+
 class CarouselTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     private let identifier = "productCollectionCell"
     private var products: [Product] = []
+    var delegate: CarouselTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.dataSource = self
@@ -36,7 +42,7 @@ extension CarouselTableViewCell: UICollectionViewDataSource{
         }
         
         cell.closure = { name in
-            print("Touch \(name)")
+            self.delegate?.touch(name: name)
         }
         
         cell.setData(data: products[indexPath.row])

@@ -14,18 +14,18 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageViewCell: UIImageView!
     
     
-    var closure: ((String) -> Void)!
-
+    var closure: ((Product) -> Void)!
+    private var product: Product?
     func setData(data: Product){
+        product = data
         priceProductLabel.text = String(data.price)
         nameProductLabel.text = (data.name)
         productImageViewCell.image = UIImage(named: (data.image))
     }
         
     @IBAction func OnAdd(_ sender: Any) {
-        if let nameProduct = nameProductLabel.text {
-            closure(nameProduct)
-        }
+        guard let product = product else { return }
+        closure(product)
     }
 }
 
